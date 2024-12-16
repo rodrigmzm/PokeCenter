@@ -77,6 +77,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\IPokemon.cs" />
+    <Compile Include="Models\ITeam.cs" />
+    <Compile Include="Models\IUser.cs" />
     <Compile Include="NurseRequest.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

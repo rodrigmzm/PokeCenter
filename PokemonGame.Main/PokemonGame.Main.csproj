@@ -185,8 +185,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Trainer\Index.cshtml" />
-    <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Trainer\_TeamPartial.cshtml" />
+    <Content Include="Views\Trainer\CreateTeam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -227,10 +227,6 @@
     <ProjectReference Include="..\PokemonGame.Data\PokemonGame.Data.csproj">
       <Project>{214933b6-2871-48af-9d9f-b7a3c6bdade0}</Project>
       <Name>PokemonGame.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PokemonGame.Repository\PokemonGame.Repository.csproj">
-      <Project>{8fc7e8a3-4e67-4c26-a20a-6b62394524f1}</Project>
-      <Name>PokemonGame.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

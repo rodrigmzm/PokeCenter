@@ -1,6 +1,6 @@
 ﻿using PokemonGame.Data;
 using PokemonGame.Main.Models;
-using PokemonGame.Repository.Services;
+using PokemonGame.Architecture.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,83 +13,86 @@ namespace PokemonGame.Main.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly PokemonBDEntities _db = new PokemonBDEntities();
+        private readonly PokemonBDEntities _db;
+        private readonly UserService _userService;
+
+        public HomeController()
+        {
+            _userService = new UserService();
+            _db = new PokemonBDEntities();
+        }
 
         public ActionResult Index()
         {
+            var sessionId = Request.Cookies["session_id"]?.Value;
+
+            if (!string.IsNullOrEmpty(sessionId))
+            {
+                return RedirectToAction("Index", "Trainer");
+            }
+
             return View();
         }
 
-        //Register
-        //[HttpGet]
-        //public ActionResult Register() 
-        //{
-        //    return View();
-        //}
-
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Register(User user)
+        public ActionResult Register(string name, string email, string password)
         {
-           if (ModelState.IsValid)
+            if (_db.Users.Any(x => x.Email == email))
             {
-                if(_db.Users.Any(x => x.Email == user.Email)) 
+                ModelState.AddModelError("", "Email already register");
+                return View("Index");
+            }
+            else
+            {
+                bool isSuccess = _userService.CreateUserDB(name, email, password);
+                if (isSuccess)
                 {
-                    ModelState.AddModelError("", "Email already register");
                     return View("Index");
                 }
-                else
-                {
-                    var hashPassword = AccountService.HashPassword(user.Password);
-                    user.Password = hashPassword;
-                    user.IdRol = 2;
-                    _db.Users.Add(user);
-                    _db.SaveChanges();
-                }
-           }
-           return View("Index");
-        }
+            }
 
-        //Login
-        [HttpGet]
-        public ActionResult Login()
-        {
-            return View();
-        }
+            return View("Index");
+        } 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login(UserViewModel user)
+        public ActionResult Login(string email, string password)
         {
-            var loginHash = AccountService.HashPassword(user.Password);
-            var query = _db.Users.SingleOrDefault(x => x.Email == user.Email && x.Password == loginHash);
-
-            if (query != null)
+            var search = _userService.LoginUserDB(email, password);
+            
+            if (search != null)
             {
-                var id = query.UserId;
+                var sessionId = Guid.NewGuid().ToString();
 
-                if (query.IdRol == 1)
+                var cookie = new HttpCookie("session_id", sessionId)
                 {
-                    return View("~/Views/Admin/Index.cshtml");
-                }
-                if (query.IdRol == 2)
-                {
-                    return RedirectToAction("Index", "Trainer", new { id = id });
-                }
-                if (query.IdRol == 3)
-                {
-                    return View("~/Views/Nurse/Index.cshtml");
-                }
+                    HttpOnly = true,
+                    Secure = true,
+                    SameSite = SameSiteMode.Strict,
+                    Expires = DateTime.Now.AddHours(2),
+                    Value = search.UserId.ToString()
+                };
+
+                Response.Cookies.Add(cookie);
+
+                return RedirectToAction("Index", "Trainer");
             }
             ModelState.AddModelError("", "The email or password are incorrect");
             return View("Index");
-        }  
+        }
 
         //Logout
         public ActionResult Logout()
         {
-            Session.Abandon();
-            return RedirectToAction("Index", "Home");
+            if (Request.Cookies["session_id"] != null)
+            {
+                var cookie = new HttpCookie("session_id")
+                {
+                    Expires = DateTime.Now.AddDays(-1)
+                };
+                Response.Cookies.Add(cookie);
+            }
+
+            return View("Index");
         }
     }
 }

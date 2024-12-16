@@ -11,8 +11,8 @@ namespace PokemonGame.Data
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Team
+    using PokemonGame.Data.Models;
+    public partial class Team : ITeam
     {
         public int TeamID { get; set; }
         public int UserId { get; set; }
