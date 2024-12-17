@@ -1,0 +1,22 @@
+﻿@model IEnumerable<PokemonGame.Data.User>
+
+<h2>Send a Message</h2>
+<table class="table table-striped table-borderless">
+    <tr>
+        <th>
+            Users
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Message", "CreateMessage", new { receiverId = item.UserId })
+            </td>
+        </tr>
+    }
+</table>

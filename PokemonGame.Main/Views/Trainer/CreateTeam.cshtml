@@ -15,7 +15,6 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <!-- Selección de Pokémon 1 -->
         <div class="form-group">
             @Html.Label("Pokemon 1", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -24,7 +23,6 @@
             </div>
         </div>
 
-        <!-- Selección de Pokémon 2 -->
         <div class="form-group">
             @Html.Label("Pokemon 2", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -33,7 +31,6 @@
             </div>
         </div>
 
-        <!-- Selección de Pokémon 3 -->
         <div class="form-group">
             @Html.Label("Pokemon 3", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -42,7 +39,6 @@
             </div>
         </div>
 
-        <!-- Selección de Pokémon 4 -->
         <div class="form-group">
             @Html.Label("Pokemon 4", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -51,16 +47,15 @@
             </div>
         </div>
 
-        <!-- Descripción -->
+
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10 mb-3">
                 @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <!-- Botón de envío -->
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="CreateTrainerTeam" class="btn btn-primary" />

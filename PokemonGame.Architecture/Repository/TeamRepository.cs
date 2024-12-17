@@ -11,9 +11,6 @@ namespace PokemonGame.Architecture.Repository
     {
         public bool DeleteTeam(int id)
         {
-            //PokemonBDEntities.Entry<Team>(team).State = System.Data.Entity.EntityState.Deleted;
-            //PokemonBDEntities.Teams.Remove(team);
-
             return Delete(id);
         }
     }

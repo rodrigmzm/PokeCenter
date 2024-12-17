@@ -21,8 +21,6 @@ namespace PokemonGame.Architecture.Services
 
         public bool DeleteTeamDB(int id)
         {
-            //_team.TeamID = id;
-
             return _teamRepository.DeleteTeam(id);    
         }
     }

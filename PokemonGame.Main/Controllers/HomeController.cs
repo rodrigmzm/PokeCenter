@@ -74,6 +74,13 @@ namespace PokemonGame.Main.Controllers
 
                 Response.Cookies.Add(cookie);
 
+                var query = _db.Users.SingleOrDefault(x => x.Email == email);
+                if (query.UserId == 1) 
+                {
+                    return RedirectToAction("Index","Admin");
+                }
+
+
                 return RedirectToAction("Index", "Trainer");
             }
             ModelState.AddModelError("", "The email or password are incorrect");

@@ -127,6 +127,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TrainerController.cs" />
     <Compile Include="Global.asax.cs">
@@ -187,6 +188,14 @@
     <Content Include="Views\Trainer\Index.cshtml" />
     <Content Include="Views\Trainer\_TeamPartial.cshtml" />
     <Content Include="Views\Trainer\CreateTeam.cshtml" />
+    <Content Include="Views\Trainer\_MessagePartial.cshtml" />
+    <Content Include="Views\Trainer\CreateMessage.cshtml" />
+    <Content Include="Views\Admin\Create.cshtml" />
+    <Content Include="Views\Admin\Delete.cshtml" />
+    <Content Include="Views\Admin\Details.cshtml" />
+    <Content Include="Views\Admin\Edit.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Trainer\_MessageReceivedPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

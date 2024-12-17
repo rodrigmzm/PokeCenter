@@ -77,6 +77,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\IMessage.cs" />
     <Compile Include="Models\IPokemon.cs" />
     <Compile Include="Models\ITeam.cs" />
     <Compile Include="Models\IUser.cs" />

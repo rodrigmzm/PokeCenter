@@ -18,5 +18,10 @@ namespace PokemonGame.Architecture.Repository
         {
             return SearchUser(email, password);
         }
+
+        public IEnumerable<User> GetUsers(int userId)
+        {
+            return GetEntities(userId);
+        }
     }
 }

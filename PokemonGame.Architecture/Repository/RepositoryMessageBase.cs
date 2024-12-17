@@ -8,29 +8,33 @@ using PokemonGame.Data.Models;
 
 namespace PokemonGame.Architecture.Repository
 {
-    public class RepositoryUserBase<T> where T : class, IUser
+    public class RepositoryMessageBase<T> where T : class, IMessage
     {
         protected readonly PokemonBDEntities PokemonBDEntities;
 
-        public RepositoryUserBase()
+        public RepositoryMessageBase()
         {
             PokemonBDEntities = new PokemonBDEntities();
         }
 
-        public bool Create(T entity)
+        public bool Create (T entity)
         {
             PokemonBDEntities.Set<T>().Add(entity);
+
             return PokemonBDEntities.SaveChanges() > 0;
         }
 
-        public T SearchUser(string email, string password)
+        public bool Delete(int id)
         {
-            return PokemonBDEntities.Set<T>().SingleOrDefault(x => x.Email == email && x.Password == password);
+            Message message = PokemonBDEntities.Messages.Find(id);
+            PokemonBDEntities.Messages.Remove(message);
+
+            return PokemonBDEntities.SaveChanges() > 0;
         }
 
-        public IEnumerable<T> GetEntities(int userId)
+        public IEnumerable<T> GetMessages(int id)
         {
-            return PokemonBDEntities.Set<T>().ToList().Where(x => x.UserId != userId);
+            return PokemonBDEntities.Set<T>().ToList().Where(x => x.ReceiverId == id);
         }
     }
 }

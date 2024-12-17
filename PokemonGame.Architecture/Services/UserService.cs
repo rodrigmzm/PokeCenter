@@ -46,5 +46,12 @@ namespace PokemonGame.Architecture.Services
 
             return _userRepository.LoginUser(userEmail, userPassword);
         }
+
+        public IEnumerable<User> GetUsersDB(int userId)
+        {
+            var users = _userRepository.GetUsers(userId);
+
+            return users;
+        }
     }
 }

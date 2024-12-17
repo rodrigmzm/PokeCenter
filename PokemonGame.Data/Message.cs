@@ -11,8 +11,10 @@ namespace PokemonGame.Data
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Message
+    //using System.Runtime.Remoting.Messaging;
+    using PokemonGame.Data.Models;
+
+    public partial class Message : IMessage
     {
         public int MessageId { get; set; }
         public int SenderId { get; set; }

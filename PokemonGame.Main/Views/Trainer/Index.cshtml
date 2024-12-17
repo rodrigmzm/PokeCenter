@@ -11,15 +11,24 @@
 
                     <div class="column column-left">
                         <div class="card mb-3">
-                            <h1>Challenges</h1>
+                            @{
+                                var users = ViewBag.User as IEnumerable<PokemonGame.Data.User>;
+                            }
+                            @Html.Partial("_MessagePartial", users)
                         </div>
                         <div class="card mt-3">
-                            <h1>Messages</h1>
+                            @{
+                                var messages = ViewBag.Mesages as IEnumerable<PokemonGame.Data.Message>;
+                            }
+                            @Html.Partial("_MessageReceivedPartial", messages)
+
                         </div>
                     </div>
 
-                    <div class="column card column-right">
-                        @Html.Partial("_TeamPartial")
+                    <div class="column column-right">
+                        <div class="card">
+                            @Html.Partial("_TeamPartial")
+                        </div>
                     </div>
                 </div>
 
